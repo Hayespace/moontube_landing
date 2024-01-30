@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #daa520;
+        }
+
+        p {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+
+        #logo {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            box-shadow: 3px 3px 3px rgb(10, 8, 2);
+            border-radius: 50%;
+        }
+
+        #coming-soon {
+            font-family: monospace;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            #logo {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <video autoplay muted loop id="video-background">
+        <!-- Update 'your-video.mp4' with your video file -->
+        <source src="/spacerock.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div id="content">
+        <!-- Update 'your-logo.png' with your logo file -->
+        <img src="/LOGO_NO_TEXT.png" height="200" width="200" alt="Logo" id="logo">
+        <div id="coming-soon">
+            <h1>MOONTUBE</h1>
+            <p>PREPARE TO LAUNCH</p>
+        </div>
+    </div>
+</body>
+
+</html>

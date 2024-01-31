@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add Font Awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -16,7 +18,7 @@
         }
 
         p {
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
         }
 
         #video-background {
@@ -44,15 +46,40 @@
             max-width: 80%;
             height: auto;
             margin-bottom: 20px;
-            box-shadow: 3px 3px 3px rgb(10, 8, 2);
-            border-radius: 50%;
+
         }
 
         #coming-soon {
-            font-family: monospace;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 24px;
             font-weight: bold;
             margin-top: 20px;
+        }
+
+        #coming-soon h2 {
+            font-size: 36px;
+            animation: flicker 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.5;
+                color: #daa520;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #social-icons {
+            margin-top: 20px;
+        }
+
+        #social-icons a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 24px;
         }
 
         @media (max-width: 768px) {
@@ -72,10 +99,20 @@
 
     <div id="content">
         <!-- Update 'your-logo.png' with your logo file -->
-        <img src="/LOGO_NO_TEXT.png" height="200" width="200" alt="Logo" id="logo">
+        <img src="/dis.png" height="500" width="500" alt="Logo" id="logo">
         <div id="coming-soon">
-            <h1>MOONTUBE</h1>
-            <p>PREPARE TO LAUNCH</p>
+
+            <h2>PREPARE TO LAUNCH</h2>
+
+            <!-- Social Icons -->
+            <div id="social-icons">
+                <a href="https://twitter.com/Moontube_io" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://t.me/your_telegram_channel" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
         </div>
     </div>
 </body>

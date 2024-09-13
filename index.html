@@ -4,21 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Add Font Awesome link -->
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
 
         h1 {
             color: #daa520;
-        }
-
-        p {
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
         }
 
         #video-background {
@@ -35,18 +31,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 20px 0;
             color: white;
             text-align: center;
             z-index: 1;
         }
 
         #logo {
-            max-width: 80%;
+            max-width: 60%;
             height: auto;
             margin-bottom: 20px;
+        }
 
+        #poster {
+            max-width: 30%;
+            height: auto;
+            margin-top: 20px;
         }
 
         #coming-soon {
@@ -83,7 +85,8 @@
         }
 
         @media (max-width: 768px) {
-            #logo {
+            #logo,
+            #poster {
                 max-width: 90%;
             }
         }
@@ -99,14 +102,16 @@
 
     <div id="content">
         <!-- Update 'your-logo.png' with your logo file -->
-        <img src="/diss.png" height="500" width="500" alt="Logo" id="logo">
-        <div id="coming-soon">
-            
+        <img src="/LOGO_NO_TEXT.png" height="400" width="400" alt="Logo" id="logo">
 
+        <!-- Poster section -->
+        <img src="/PIONEERWINNER_FINAL.png" alt="Poster" id="poster">
+
+        <div id="coming-soon">
             <a class="e-widget generic-loader" href="https://gleam.io/Vuq6M/moontube-pioneers-program" rel="nofollow">
                 Moontube Pioneers Program
-              </a>
-              <script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script>
+            </a>
+            <script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script>
 
             <!-- Social Icons -->
             <div id="social-icons">

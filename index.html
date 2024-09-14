@@ -15,7 +15,7 @@
         }
 
         h1 {
-            color: hsl(0, 0%, 100%);
+            color: #ffffff;
         }
 
         #video-background {
@@ -28,28 +28,58 @@
             z-index: -1;
         }
 
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Transparent black background */
+            z-index: 100; /* To make sure the navbar stays on top of everything */
+        }
+
+        #navbar img {
+            max-width: 180px; /* Increase logo size */
+            height: auto;
+        }
+
+        #navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #navbar ul li {
+            margin-left: 20px;
+        }
+
+        #navbar ul li a {
+            color: #FFCD29; /* Matching icon color */
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
         #content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100%;
-            padding-top: 100px; /* Extra space at the top */
+            padding-top: 150px; /* Adjust padding to account for navbar height */
             color: white;
             text-align: center;
             z-index: 1;
         }
 
-        #logo {
-            max-width: 60%;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        #poster {
+        #middle-logo {
             max-width: 30%;
             height: auto;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         #coming-soon {
@@ -86,9 +116,17 @@
         }
 
         @media (max-width: 768px) {
-            #logo,
-            #poster {
+            #middle-logo {
                 max-width: 90%;
+            }
+
+            #navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #navbar ul li {
+                margin: 10px 0;
             }
         }
     </style>
@@ -101,9 +139,15 @@
         Your browser does not support the video tag.
     </video>
 
+    <!-- Navbar Section -->
+    <div id="navbar">
+        <img src="/LOGO-WEB_NOTAG.png" alt="Logo in Navbar">
+       
+    </div>
+
     <div id="content">
-        <!-- Update 'your-logo.png' with your logo file -->
-        <img src="/LOGO-WEB_NOTAG.png" height="500" width="500" alt="Logo" id="logo">
+        <!-- Middle logo -->
+        <img src="/MT_ONMOON_BLK.png" alt="Middle Logo" id="middle-logo">
 
         <h1>COMING SOON!</h1>
 

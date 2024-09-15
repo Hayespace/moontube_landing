@@ -60,6 +60,45 @@
             height: auto;
         }
 
+        /* Scrolling Alert Banner */
+        #alert-banner {
+            position: fixed;
+            top: 80px; /* Just below the navbar */
+            width: 100%;
+            
+            color: #000;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        #alert-banner a {
+            color: #ffffff;
+            font-family: "noto-sans-georgian", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-decoration: none;
+        }
+
+        @keyframes scroll-banner {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        #alert-banner span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-banner 30s linear infinite;
+            white-space: nowrap; /* Prevents text from wrapping */
+        }
+
         #content {
             display: flex;
             flex-direction: column;
@@ -96,6 +135,16 @@
             font-size: 24px;
         }
 
+        /* Pioneer Program Section */
+        #pioneer-section {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+
         @media (max-width: 768px) {
             #middle-logo {
                 max-width: 90%;
@@ -115,9 +164,14 @@
         <img src="/LOG-WORD.png" alt="Logo in Navbar">
     </div>
 
+    <!-- Scrolling Alert Banner -->
+    <div id="alert-banner">
+        <a href="#pioneer-section"><span>JOIN THE MOONTUBE PIONEER PROGRAM</span></a>
+    </div>
+
     <div id="content">
         <!-- Middle logo -->
-        <img src="/MT_ONMOON_BLK.png" alt="Middle Logo" id="middle-logo">
+        <img src="/MOON-HI.png" alt="Middle Logo" id="middle-logo">
         <h3>The World's First Video Degen Pla<i>t</i>form</h3>
         <h1>COMING SOON!</h1>
 
@@ -132,6 +186,12 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <!-- Pioneer Program Section -->
+    <div id="pioneer-section">
+        <h1>Moontube Pioneer Program</h1>
+        <img src="/poster.png" height="500">
     </div>
 </body>
 

@@ -1,198 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Adobe Fonts (Proxima Soft) -->
-    <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            height: 100vh;
-        }
-
-        h1 {
-            font-family: "noto-sans-georgian", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            color: #ffffff;
-        }
-
-        h3 {
-            font-family: "proxima-soft", sans-serif;
-            color: #ffffff;
-            font-weight: 400;
-            font-size: 24px;
-            font-style: normal;
-        }
-
-        #video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        #navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.6); /* Transparent black background */
-            z-index: 100;
-        }
-
-        #navbar img {
-            max-width: 180px;
-            height: auto;
-        }
-
-        /* Scrolling Alert Banner */
-        #alert-banner {
-            position: fixed;
-            top: 80px; /* Just below the navbar */
-            width: 100%;
-            
-            color: #000;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            z-index: 100;
-            overflow: hidden;
-        }
-
-        #alert-banner a {
-            color: #ffffff;
-            font-family: "noto-sans-georgian", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            text-decoration: none;
-        }
-
-        @keyframes scroll-banner {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        #alert-banner span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: scroll-banner 30s linear infinite;
-            white-space: nowrap; /* Prevents text from wrapping */
-        }
-
-        #content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding-top: 150px;
-            color: white;
-            text-align: center;
-            z-index: 1;
-        }
-
-        #middle-logo {
-            max-width: 30%;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        #coming-soon {
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        #social-icons {
-            margin-top: 20px;
-        }
-
-        #social-icons a {
-            color: #FFCD29;
-            margin: 0 10px;
-            text-decoration: none;
-            font-size: 24px;
-        }
-
-        /* Pioneer Program Section */
-        #pioneer-section {
-            margin-top: 50px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 50px;
-            text-align: center;
-            font-family: 'Trebuchet MS', sans-serif;
-        }
-
-        @media (max-width: 768px) {
-            #middle-logo {
-                max-width: 90%;
-            }
-        }
-    </style>
-</head>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="assets/images/MoontubeLogoB&W.png" type="image/png">
+        <title>Moontube</title>
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <!-- Proxima Soft from Adobe Fonts -->
+        <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
+        <link rel="stylesheet" href="assets/style.css">
+    </head>
 <body>
-    <video autoplay muted loop id="video-background">
-        <source src="/spacerock.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Navbar Section -->
-    <div id="navbar">
-        <img src="/LOG-WORD.png" alt="Logo in Navbar">
+    <!-- Coming Soon Scroller -->
+    <div class="scroller">
+        <p>COMING SOON <img src="assets/images/MoontubeLogoB&W.png" height="20"></p>
     </div>
 
-    <!-- Scrolling Alert Banner -->
-    <div id="alert-banner">
-        <a href="#pioneer-section"><span>JOIN THE MOONTUBE PIONEER PROGRAM</span></a>
+    <!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-logo">
+        <img src="assets/images/LOG-WORD.png" alt="Moontube Logo" class="logo">
     </div>
-
-    <div id="content">
-        <!-- Middle logo -->
-        <img src="/MOON-HI.png" alt="Middle Logo" id="middle-logo">
-        <h3>The World's First Video Degen Pla<i>t</i>form</h3>
-        <h1>COMING SOON!</h1>
-
-        <div id="coming-soon">
-            <!-- Social Icons -->
-            <div id="social-icons">
-                <a href="https://twitter.com/Moontubeio" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-twitter fa-xl"></i>
-                </a>
-                <a href="https://t.me/moontube_io_official" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-telegram fa-xl"></i>
-                </a>
-            </div>
+    
+    <!-- Dropdown Menu -->
+    <div class="navbar-menu">
+        <button class="dropdown-btn">Menu <i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-content">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="pioneer.html">Pioneer Program</a>
+            <a href="NFT.html">Mint</a>
+            <a href="#" onclick="checkPassword()">Become a Moontuber</a>
         </div>
     </div>
+</nav>
 
-    <!-- Pioneer Program Section -->
-    <div id="pioneer-section">
-        <h1>Moontube Pioneer Program</h1>
-        <img src="/poster.png" height="500">
+    <!-- Sidebar Menu -->
+    <aside class="sidebar">
+        <ul class="sidebar-items">
+            <li class="sidebar-item">
+                <button onclick="location.href='index.html';" class="sidebar-btn active">Home</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='about.html';" class="sidebar-btn">About</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='pioneer.html';" class="sidebar-btn">Pioneer Program</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='NFT.html';" class="sidebar-btn">Mint</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="checkPassword()" class="sidebar-btn">
+                    <i class="fas fa-lock"></i> Become a Moontuber
+                </button>
+            </li>
+        </ul>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Teaser Section -->
+    
+        <h1>Welcome to Moontube</h1>
+        <video width="600" class="vid" controls>
+            <source src="assets/images/MOONTUBE_v4.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    
     </div>
+    <script src="assets/script.js"></script>
 </body>
-
 </html>

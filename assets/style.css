@@ -293,6 +293,7 @@ p {
     justify-content: center;
     gap: 20px;
     padding: 20px;
+    padding-bottom: 20px;
 }
 
 .feature-box {
@@ -326,6 +327,56 @@ p {
 .feature-box p {
     font-size: 0.95rem;
     color: #bbb;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #131316;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer a {
+    color: #ff8395;
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #be1aff;
+}
+
+.footer p {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* Footer Styling */
+.socials {
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.socials a {
+    color: #ff8395;
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    color: #be1aff;
+}
+
+.socials p {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 

@@ -331,13 +331,16 @@ p {
 
 /* Footer Styling */
 .footer {
-    background-color: #131316;
+    background-color: transparent; /* Make the footer background transparent */
     color: white;
-    text-align: center;
+    text-align: left; /* Align content to the left */
     padding: 20px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center the icons */
+    justify-content: flex-start; /* Align the icons to the left */
 }
 
 .footer a {
@@ -356,10 +359,19 @@ p {
     font-size: 1.2rem;
 }
 
+/* Responsive Styling for smaller screens */
+@media (max-width: 930px) {
+    .footer {
+        justify-content: flex-start; /* Ensure the icons stay left-aligned on small screens */
+        text-align: left; /* Force text alignment to the left */
+    }
+}
+
+
 /* Footer Styling */
 .socials {
     color: white;
-    text-align: center;
+    text-align: left;
     padding: 20px;
 }
 

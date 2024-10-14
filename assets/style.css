@@ -336,6 +336,8 @@ p {
     justify-content: flex-start; /* Align the icons to the left */
 }
 
+
+
 .footer a {
     color: #ff8395;
     margin: 0 10px;
@@ -410,6 +412,10 @@ iframe {
 /* Responsive Styles */
 @media (max-width: 930px) {
     .sidebar {
+        display: none;
+    }
+
+    .footer-sml {
         display: none;
     }
 

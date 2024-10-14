@@ -194,7 +194,7 @@ button {
     
 }
 
-/* Main Content */
+/* Main Content Styling */
 .main-content {
     margin-left: 270px;
     padding: 2rem;
@@ -204,13 +204,6 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.main-content section {
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 3rem;
 }
 
 /* Info Box Styling */
@@ -389,6 +382,28 @@ p {
 .socials p {
     margin-bottom: 10px;
     font-size: 1.2rem;
+}
+
+/* Customize loader, if used */
+.generic-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #543DD0; /* Remove loader background */
+}
+
+/* Override any iframe background styles */
+iframe {
+    background-color: transparent; /* Ensure iframe background is transparent */
+    border: none; /* Remove borders */
+}
+
+.main-content section {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 3rem;
 }
 
 

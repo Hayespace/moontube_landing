@@ -1,40 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="assets/images/MoontubeLogoB&W.png" type="image/png">
-        <title>Moontube</title>
-        <!-- Font Awesome for icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <!-- Proxima Soft from Adobe Fonts -->
-        <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
-        <link rel="stylesheet" href="assets/style.css">
-    </head>
-<body>
-    <!-- Coming Soon Scroller -->
-    <div class="scroller">
-        <p>COMING SOON <img src="assets/images/MoontubeLogoB&W.png" height="20"></p>
-    </div>
+  <head>
+    <title>Moontube Pioneers Program</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" content="https://gleam.io/Vuq6M/moontube-pioneers-program" />
+    <meta property="og:title" content="Moontube Pioneers Program" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="icon" href="assets/images/MoontubeLogoB&W.png" type="image/png">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Proxima Soft from Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <style>
+      /* Reset margins and paddings */
+      * { margin: 0; padding: 0; border: none; }
+      
+      /* Full height layout */
+      html, body { height: 100%; overflow: hidden; }
 
-        <!-- Navbar -->
-<nav class="navbar">
-    <div class="navbar-logo">
-        <img src="assets/images/LOG-WORD.png" alt="Moontube Logo" class="logo">
-    </div>
-    
-    <!-- Dropdown Menu -->
-    <div class="navbar-menu">
-        <button class="dropdown-btn">Menu <i class="fas fa-caret-down"></i></button>
-        <div class="dropdown-content">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="pioneer.html">Pioneer Program</a>
-            <a href="NFT.html">Mint</a>
-            <a href="#" onclick="checkPassword()">Become a Moontuber</a>
+      /* Iframe taking up full available space */
+      iframe {
+        width: 100%;
+        height: 100vh; /* Full viewport height */
+        border: none; /* Remove any default borders */
+        background-color: transparent; /* Ensure no background shows */
+      }
+
+      /* Responsive design for mobile */
+      @media (max-width: 930px) {
+        iframe {
+          height: 100vh; /* Ensure iframe height adapts for smaller screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="assets/images/LOG-WORD.png" alt="Moontube Logo" class="logo">
         </div>
-    </div>
-</nav>
+        <!-- Dropdown Menu -->
+        <div class="navbar-menu">
+            <button class="dropdown-btn">Menu <i class="fas fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="pioneer.html">Pioneer Program</a>
+                <a href="NFT.html">Mint</a>
+                <a href="#" onclick="checkPassword()">Become a Moontuber</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Sidebar Menu -->
     <aside class="sidebar">
@@ -52,27 +72,20 @@
                 <button onclick="location.href='NFT.html';" class="sidebar-btn">Mint</button>
             </li>
             <li class="sidebar-item">
-                <button onclick="location.href='secret.html';" class="sidebar-btn active">
-                    <i class="fas fa-lock-open"></i> Become a Moontuber
+                <button onclick="checkPassword()" class="sidebar-btn">
+                    <i class="fas fa-lock"></i> Become a Moontuber
                 </button>
             </li>
         </ul>
     </aside>
-    
 
-    <!-- Main Content -->
+    <!-- Main Content with Iframe Embed -->
     <div class="main-content">
-    
+      <iframe src="https://gleam.io/Vuq6M/moontube-pioneers-program" frameborder="0" allowfullscreen></iframe>
+    </div>
 
-    <section>
-        <a class="e-widget generic-loader" href="https://gleam.io/Vuq6M/moontube-pioneers-program" rel="nofollow">
-            Moontube Pioneers Program
-          </a>
-          <script type="text/javascript" src="https://widget.gleamjs.io/e.js" async="true"></script>
-    </section>
-
-     <!-- Footer Section -->
-     <footer class="footer">
+    <!-- Footer Section -->
+    <footer class="footer">
         <a href="https://x.com/moontubeio" target="_blank">
             <i class="fab fa-twitter"></i>
         </a>
@@ -80,7 +93,7 @@
             <i class="fab fa-telegram"></i>
         </a>
     </footer>
-    
+
     <script src="assets/script.js"></script>
-</body>
+  </body>
 </html>

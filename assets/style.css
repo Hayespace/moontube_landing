@@ -371,6 +371,18 @@ p {
     color: #ddd; /* Change text color */
 }
 
+/* Ensuring the partnership email section is below and centered */
+.partners-page #partnership-email {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Add space between partners and the email section */
+    width: 100%; /* Make sure it takes the full width */
+}
+
+.partners-page .info-box {
+    max-width: 800px; /* Limit the width of the info box */
+    text-align: center; /* Center the text inside */
+}
 
 
 

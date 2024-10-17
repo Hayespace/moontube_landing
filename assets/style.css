@@ -354,6 +354,26 @@ p {
     font-size: 1.2rem;
 }
 
+/* Specific styles for feature boxes on the Partners page */
+.partners-page .feature-box {
+    background-color: rgba(255, 131, 149, 0.8); /* Change the background color */
+    border-radius: 20px; /* Change the border radius */
+    box-shadow: 0 6px 12px rgba(255, 131, 149, 0.5); /* Slightly larger shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+}
+
+.partners-page .feature-box:hover {
+    transform: translateY(-8px); /* Larger lift on hover */
+    box-shadow: 0 10px 20px rgba(255, 131, 149, 0.8); /* Brighter shadow on hover */
+}
+
+.partners-page .feature-box p {
+    color: #ddd; /* Change text color */
+}
+
+
+
+
 /* Responsive Styling for smaller screens */
 @media (max-width: 930px) {
     .footer {

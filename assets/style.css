@@ -384,7 +384,9 @@ p {
     text-align: center; /* Center the text inside */
 }
 
-
+.left-align {
+    text-align: left;
+}
 
 /* Responsive Styling for smaller screens */
 @media (max-width: 930px) {

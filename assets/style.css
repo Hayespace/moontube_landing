@@ -336,6 +336,12 @@ p {
     justify-content: flex-start; /* Align the icons to the left */
 }
 
+.mint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Adjusts the spacing between the image and button */
+}
 
 
 .footer a {

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/MoontubeLogoB&W.png" type="image/png">
+    <title>Moontube</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Proxima Soft from Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
+</head>
+<body>
+    <!-- Coming Soon Scroller -->
+    <div class="scroller">
+        <p>COMING SOON <img src="assets/images/MoontubeLogoB&W.png" height="20"></p>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="assets/images/LOG-WORD.png" alt="Moontube Logo" class="logo">
+        </div>
+        <div class="navbar-menu">
+            <button class="dropdown-btn">Menu <i class="fas fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="pioneer.html">Pioneer Program</a>
+                <a href="NFT.html">Mint</a>
+                <a href="partners.html">Partners & Tech</a>
+                <a href="#" onclick="checkPassword()">Become a Moontuber</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar">
+        <ul class="sidebar-items">
+            <li class="sidebar-item">
+                <button onclick="location.href='index.html';" class="sidebar-btn">Home</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='about.html';" class="sidebar-btn">About</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='pioneer.html';" class="sidebar-btn">Pioneer Program</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='NFT.html';" class="sidebar-btn active">Mint</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="location.href='partners.html';" class="sidebar-btn">Partners & Tech</button>
+            </li>
+            <li class="sidebar-item">
+                <button onclick="checkPassword()" class="sidebar-btn">
+                    <i class="fas fa-lock"></i> Become a Moontuber
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Mint Section -->
+        <section>
+            <div class="info-box">
+                <h1>Mint Your Moontube Profit Share NFTs</h1>
+                <h1>0.2ETH</h1>
+                <p>The Moontube Pioneer Program NFT entitles the holder to a share of 2% of Moontube platform revenue in perpetuity from trending services, paid banners, bulk airdropper fees, swap fees, trending video services, presale promo click-throughs, Moontuber hire commissions, and more.</p>
+            </div>
+
+            <!-- Minting Card (Console Style) -->
+            <div class="mint-card">
+                <img src="assets/images/gif.gif" height="350" alt="NFT Image" class="nft-image">
+
+                <p id="mintedStatus">Loading...</p>
+
+                <!-- Quantity Selector and Button in Vertical Layout -->
+                <div class="mint-controls">
+                    <label for="mintAmount">Number of NFTs to mint:</label>
+                    <input type="number" id="mintAmount" min="1" value="1">
+                    <button onclick="mintNFT()" class="large-mint-button">Mint NFT</button>
+                </div>
+
+                <p id="status"></p>
+            </div>
+        </section>  
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <a href="https://x.com/moontubeio" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://t.me/moontube_io_official" target="_blank"><i class="fab fa-telegram"></i></a>
+    </footer>
+
+    <!-- External Script for Web3 and Minting -->
+    <script src="assets/script.js"></script>
+</body>
+</html>

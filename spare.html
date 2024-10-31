@@ -82,9 +82,12 @@
                 <div class="mint-controls">
                     <label for="mintAmount">Number of NFTs to mint:</label>
                     <input type="number" id="mintAmount" min="1" value="1">
-                    <button onclick="mintNFT()" class="large-mint-button">Mint NFT</button>
+                    <button id="walletActionButton" onclick="handleButtonClick()" class="your-button-style">
+                        Connect Wallet
+                    </button>
+        
                 </div>
-
+                <!-- Add a Connect Wallet button in your HTML -->
                 <p id="status"></p>
             </div>
         </section>  
@@ -98,5 +101,7 @@
 
     <!-- External Script for Web3 and Minting -->
     <script src="assets/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.4.1/dist/umd/index.min.js"></script>
+
 </body>
 </html>

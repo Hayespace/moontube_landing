@@ -5,36 +5,41 @@ const contractAddress = "0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7";
 
         let web3;
         let contract;
-
+        let isConnected = false; // Track connection status
+        
+        // Load the minted status of NFTs
         async function loadMintedStatus() {
             try {
-                const totalSupply = await contract.methods.totalSupply().call(); // Current number of minted NFTs
-                const collectionSize = await contract.methods.collectionSize().call(); // Total collection size
+                const totalSupply = await contract.methods.totalSupply().call();
+                const collectionSize = await contract.methods.collectionSize().call();
                 document.getElementById('mintedStatus').innerText = `${totalSupply}/${collectionSize} NFTs minted`;
             } catch (error) {
                 console.error("Error loading minted status:", error);
                 document.getElementById('mintedStatus').innerText = "Error loading minted status.";
             }
         }
-
-        window.addEventListener('load', async () => {
+        
+        // Connect wallet function
+        async function connectWallet() {
             if (window.ethereum) {
                 web3 = new Web3(window.ethereum);
                 try {
                     await window.ethereum.request({ method: 'eth_requestAccounts' });
                     contract = new web3.eth.Contract(abi, contractAddress);
                     document.getElementById('status').innerText = "Connected to Ethereum network.";
-                    
-                    // Load initial minted status
-                    loadMintedStatus();
+                    isConnected = true; // Update connection status
+                    document.getElementById('walletActionButton').innerText = "Mint NFT"; // Change button text
+                    loadMintedStatus(); // Load initial minted status
                 } catch (error) {
+                    console.error("Connection failed:", error);
                     document.getElementById('status').innerText = "Connection failed.";
                 }
             } else {
                 alert("Please install MetaMask!");
             }
-        });
-
+        }
+        
+        // Mint NFT function
         async function mintNFT() {
             try {
                 const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -42,7 +47,7 @@ const contractAddress = "0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7";
                 const amountToMint = parseInt(document.getElementById('mintAmount').value);
                 const mintPrice = await contract.methods.PRICE().call();
                 const totalCost = web3.utils.toBN(mintPrice).mul(web3.utils.toBN(amountToMint));
-
+        
                 document.getElementById('status').innerText = "Minting in progress...";
                 await contract.methods.mintToMultiple(userAddress, amountToMint).send({
                     from: userAddress,
@@ -55,6 +60,15 @@ const contractAddress = "0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7";
             } catch (error) {
                 console.error(error);
                 document.getElementById('status').innerText = "Minting failed.";
+            }
+        }
+        
+        // Handle button click for both connection and minting
+        function handleButtonClick() {
+            if (isConnected) {
+                mintNFT(); // If connected, mint NFT
+            } else {
+                connectWallet(); // If not connected, connect wallet
             }
         }
 

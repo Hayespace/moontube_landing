@@ -72,24 +72,25 @@
                 <p>The Moontube Pioneer Program NFT entitles the holder to a share of 2% of Moontube platform revenue in perpetuity from trending services, paid banners, bulk airdropper fees, swap fees, trending video services, presale promo click-throughs, Moontuber hire commissions, and more.</p>
             </div>
 
-            <!-- Minting Card (Console Style) -->
             <div class="mint-card">
                 <img src="assets/images/gif.gif" height="350" alt="NFT Image" class="nft-image">
-
+            
                 <p id="mintedStatus">Loading...</p>
-
+            
                 <!-- Quantity Selector and Button in Vertical Layout -->
                 <div class="mint-controls">
                     <label for="mintAmount">Number of NFTs to mint:</label>
-                    <input type="number" id="mintAmount" min="1" value="1">
+                    <input type="number" id="mintAmount" min="1" value="1" onchange="updateGasEstimate()">
                     <button id="walletActionButton" onclick="handleButtonClick()" class="your-button-style">
                         Connect Wallet
                     </button>
-        
                 </div>
-                <!-- Add a Connect Wallet button in your HTML -->
+            
+                <!-- Gas Estimate Display -->
+                <p id="gasEstimate">Connect wallet to estimate gas.</p>
                 <p id="status"></p>
             </div>
+            
         </section>  
     </div>
 

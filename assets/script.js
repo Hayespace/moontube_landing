@@ -1,4 +1,4 @@
-// Detect if the user is on a mobile device
+// Function to detect if the user is on a mobile device
 function isMobileDevice() {
     return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
@@ -14,46 +14,16 @@ window.onload = function() {
     }
 };
 
-// Function for RainbowKit wallet connection
+// RainbowKit wallet connection function for mobile users
 async function connectWalletRainbowKit() {
-    const { chains, provider } = wagmi.configureChains(
-        [wagmi.mainnet, wagmi.polygon],
-        [wagmi.publicProvider()]
-    );
-
-    const client = wagmi.createClient({
-        autoConnect: true,
-        connectors: wagmi.getDefaultWallets({
-            appName: 'Moontube NFT App',
-            chains,
-        }).connectors,
-        provider
-    });
-
-    const { WagmiConfig, RainbowKitProvider } = RainbowKit;
-    new WagmiConfig({
-        client
-    });
-    new RainbowKitProvider({
-        chains
-    });
-
-    // Use the client to connect to the wallet
-    const { address, isConnected } = wagmi.useAccount();
-
-    if (!isConnected) {
-        alert("Please connect your wallet!");
-        return;
-    }
-
-    console.log(`Connected wallet address: ${address}`);
-    // Proceed with minting logic here if required
+    alert("RainbowKit Wallet Connect Placeholder - Implement Wallet Connection Here");
+    // Implement RainbowKit initialization and wallet connection here
 }
 
-// Password-protected access function
+// Password-protected page access function
 function checkPassword() {
     const password = prompt("Please enter the password to access this page:");
-    const correctPassword = "moontube123"; // Change to desired password
+    const correctPassword = "moontube123"; // Change to your desired password
 
     if (password === correctPassword) {
         window.location.href = 'secret.html';

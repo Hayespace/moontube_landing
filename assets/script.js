@@ -5,29 +5,55 @@ let web3;
 let contract;
 let userAddress;
 let isConnected = false;
+let provider;
 
-// Initialize Web3 and Contract
+// Detect device and set wallet connection method
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 async function initWeb3() {
     if (window.ethereum) {
         web3 = new Web3(window.ethereum);
         contract = new web3.eth.Contract(abi, contractAddress);
         console.log("Contract initialized");
+    } else if (isMobile) {
+        await connectWithRainbowKit();
     } else {
         alert("Please install MetaMask or a compatible wallet.");
     }
 }
 
-// Handle Connect & Mint Button
+// Initialize RainbowKit for Mobile Users
+async function connectWithRainbowKit() {
+    // Initialize RainbowKit
+    provider = await RainbowKit.init({
+        appName: "Moontube",
+        chains: [{ name: "Ethereum", network: "sepolia" }]  // Use Sepolia for testnet
+    });
+
+    const accounts = await provider.enable();
+    userAddress = accounts[0];
+    document.getElementById("walletActionButton").innerText = "Mint NFT";
+    isConnected = true;
+    document.getElementById("status").innerText = "Connected to Ethereum network.";
+    loadMintedStatus();
+    updateGasEstimate();
+}
+
+// Connect wallet on button click
 async function handleButtonClick() {
     if (!isConnected) {
         try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            userAddress = accounts[0];
-            document.getElementById("walletActionButton").innerText = "Mint NFT";
-            isConnected = true;
-            document.getElementById("status").innerText = "Connected to Ethereum network.";
-            loadMintedStatus();
-            updateGasEstimate(); // Update gas estimate after connecting wallet
+            if (isMobile) {
+                await connectWithRainbowKit();
+            } else {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                userAddress = accounts[0];
+                document.getElementById("walletActionButton").innerText = "Mint NFT";
+                isConnected = true;
+                document.getElementById("status").innerText = "Connected to Ethereum network.";
+                loadMintedStatus();
+                updateGasEstimate();
+            }
         } catch (error) {
             console.error("Wallet connection failed:", error);
             document.getElementById("status").innerText = "Connection failed.";
@@ -106,3 +132,6 @@ function checkPassword() {
         alert("Incorrect password. Access denied.");
     }
 }
+
+// RainbowKit Wallet Button Event for Mobile Users
+document.getElementById("rainbowWalletButton").onclick = connectWithRainbowKit;

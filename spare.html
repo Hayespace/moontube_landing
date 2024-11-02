@@ -84,8 +84,9 @@
                     <button id="walletActionButton" onclick="handleButtonClick()" class="your-button-style">
                         Connect Wallet
                     </button>
+                    <button id="rainbowWalletButton" class="your-button-style">Connect Wallet (Mobile)</button>
+
                 </div>
-            
                 <!-- Gas Estimate Display -->
                 <p id="gasEstimate">Connect wallet to estimate gas.</p>
                 <p id="status"></p>
@@ -103,6 +104,11 @@
     <!-- External Script for Web3 and Minting -->
     <script src="assets/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.4.1/dist/umd/index.min.js"></script>
+    <!-- Add Ethers.js -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.0/dist/ethers.min.js"></script>
+    <!-- Add RainbowKit -->
+    <script src="https://cdn.jsdelivr.net/npm/@rainbow-me/rainbowkit@latest"></script>
+
 
 </body>
 </html>

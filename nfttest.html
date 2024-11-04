@@ -1,67 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/images/MoontubeLogoB&W.png" type="image/png">
-    <title>Moontube</title>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
-    <link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moontube Pioneer Minting Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/bnm2uow.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-logo">
-            <img src="assets/images/LOG-WORD.png" alt="Moontube Logo" class="logo">
-        </div>
-    </nav>
+  <!-- Minting Card -->
+  <div class="mint-card">
+    <h2>Moontube Pioneer Program</h2>
+    <p>Mint your NFT to join the Pioneer Program!</p>
+    <div id="status"></div>
+    <button id="connectMintButton">Connect Wallet & Mint</button>
+  </div>
 
-    <!-- Sidebar Menu -->
-    <aside class="sidebar">
-        <ul class="sidebar-items">
-            <li><button onclick="location.href='index.html'" class="sidebar-btn">Home</button></li>
-            <li><button onclick="location.href='about.html'" class="sidebar-btn">About</button></li>
-            <li><button onclick="location.href='pioneer.html'" class="sidebar-btn">Pioneer Program</button></li>
-            <li><button onclick="location.href='NFT.html'" class="sidebar-btn active">Mint</button></li>
-            <li><button onclick="location.href='partners.html'" class="sidebar-btn">Partners & Tech</button></li>
-        </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Mint Section -->
-        <section class="mint-section">
-            <h1>Mint Your Moontube Profit Share NFTs</h1>
-            <p>The Moontube Pioneer Program NFT entitles the holder to a share of 2% of Moontube platform revenue in perpetuity.</p>
-            <img src="assets/images/gif.gif" alt="NFT Preview" class="nft-image" height="300">
-
-            <!-- Minting Card -->
-            <div class="minting-card">
-                <p id="mintedCount">NFTs Minted: Loading...</p>
-                <p id="gasEstimate">Estimated Gas: Loading...</p>
-                
-                <!-- Combined Wallet Connect and Mint Button -->
-                <button id="connectMintButton" onclick="handleConnectAndMint()">Connect Wallet & Mint</button>
-                
-                <!-- Quantity Selection -->
-                <div class="quantity-selector">
-                    <button onclick="decreaseQuantity()">-</button>
-                    <input type="text" id="mintQuantity" value="1" readonly>
-                    <button onclick="increaseQuantity()">+</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <a href="https://x.com/moontubeio" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://t.me/moontube_io_official" target="_blank"><i class="fab fa-telegram"></i></a>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="assets/script.js"></script>
+  <script src="assets/mint.js"></script>
 </body>
 </html>

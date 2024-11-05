@@ -339,7 +339,6 @@ button {
 
 .vid {
     border: 1.5px solid transparent;
-    border-image-source: linear-gradient(90deg, #FF3131 0%, #942983 22.5%, #543DD0 69.5%, #1A82FF 100%);
     border-image-slice: 1;
     box-shadow: 0 4px 8px rgba(120, 120, 120, 0.655);
     transition: all 0.3s ease-in-out; /* Smooth transition */

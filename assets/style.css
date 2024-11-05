@@ -19,36 +19,60 @@ body {
     flex-direction: column;
 }
 
-/* Scroller Styling */
+/* Remove left gap on the scroller */
 .scroller {
-    background-color: #000;
-    color: #ff8395;
-    padding: 0.1rem;
+    background: linear-gradient(90deg, #FF3131, #942983, #543DD0, #1A82FF);
+    color: white;
+    padding: 0.5rem;
     position: fixed;
     top: 0;
-    width: 100%;
+    left: 0; /* Ensures it starts at the left edge */
+    width: 100vw; /* Sets the width to the full viewport width */
     z-index: 1100;
-    font-size: 1rem;
+    font-size: 1.2rem;
     overflow: hidden;
-    border-bottom: 1.5px solid transparent;
-    border-image-source: linear-gradient(90deg, #FF3131 0%, #942983 22.5%, #543DD0 69.5%, #1A82FF 100%);
-    border-image-slice: 1;
+    display: flex;
+    align-items: center;
+    animation: flash 2s infinite alternate;
+    box-sizing: border-box; /* Ensures padding doesn't cause extra spacing */
+}
+
+
+/* Flash animation for light pulsing effect */
+@keyframes flash {
+    0% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1.2); /* Adjust to control the intensity of the flash */
+    }
+}
+
+/* Scrolling effect for scroller text */
+.scroller a {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: scroll-left 25s linear infinite;
+    gap: 50px; /* Space between each scrolling item */
+    text-decoration: none;
+    color: inherit;
 }
 
 .scroller p {
     display: inline-block;
-    white-space: nowrap;
-    animation: scroll-left 15s linear infinite;
+    margin: 0;
 }
 
+/* Horizontal scrolling animation */
 @keyframes scroll-left {
     0% {
-        transform: translateX(100vw);
+        transform: translateX(100%);
     }
     100% {
         transform: translateX(-100%);
     }
 }
+
 
 /* Navbar styles */
 .navbar {

@@ -52,9 +52,7 @@
       <button onclick="handleMint()">Mint Tokens</button>
     </div>
 
-    <script type="module">
-      import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.esm.min.js';
-
+    <script>
       const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7';
       const contractABI = [
         {
@@ -78,20 +76,18 @@
         }
       ];
 
-      // Check if on a mobile device
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-      async function getProvider() {
-        if (typeof window.ethereum !== 'undefined' && !isMobile) {
-          // Use MetaMask for desktop
+      async function setupWalletConnect() {
+        if (typeof window.ethereum !== 'undefined') {
+          // Use MetaMask if available
           await window.ethereum.request({ method: 'eth_requestAccounts' });
           return new ethers.providers.Web3Provider(window.ethereum);
         } else {
           // Use WalletConnect for mobile
           const walletConnectProvider = new WalletConnectProvider.default({
-            infuraId: '361e4e5047824e21b258410f274b3550' // Replace with your Infura project ID
+            rpc: {
+              1: "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID" // Replace with your own RPC URL if needed
+            }
           });
-          
           await walletConnectProvider.enable();
           return new ethers.providers.Web3Provider(walletConnectProvider);
         }
@@ -99,7 +95,7 @@
 
       async function mintTokens(toAddress, amount) {
         try {
-          const provider = await getProvider();
+          const provider = await setupWalletConnect();
           const signer = provider.getSigner();
           const contract = new ethers.Contract(contractAddress, contractABI, signer);
           const price = await contract.getPrice(amount);
@@ -128,7 +124,7 @@
         const tokenAmount = ethers.BigNumber.from(amount);
 
         await mintTokens(recipientAddress, tokenAmount);
-      }
+      };
     </script>
   </body>
 </html>

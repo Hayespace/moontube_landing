@@ -630,6 +630,42 @@ button[type="submit"]:hover {
     }
 }
 
+/* Styling for the big button */
+.big-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 20px 40px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #FF3131, #942983, #543DD0, #1A82FF);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.big-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    filter: brightness(1.2);
+}
+
+/* Flash animation for a pulsing effect */
+@keyframes flash {
+    0% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1.15);
+    }
+}
+
+.big-button {
+    animation: flash 1.5s ease-in-out infinite alternate;
+}
+
 
 
 /* Responsive Styles */

@@ -53,9 +53,9 @@
     </div>
 
     <script type="module">
-      import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.esm.min.js'
+      import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.esm.min.js';
 
-      const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7'
+      const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7';
       const contractABI = [
         {
           inputs: [
@@ -69,52 +69,29 @@
         },
         {
           inputs: [
-            {
-              internalType: 'uint256',
-              name: '_count',
-              type: 'uint256'
-            }
+            { internalType: 'uint256', name: '_count', type: 'uint256' }
           ],
           name: 'getPrice',
           outputs: [
-            {
-              internalType: 'uint256',
-              name: '',
-              type: 'uint256'
-            }
+            { internalType: 'uint256', name: '', type: 'uint256' }
           ],
           stateMutability: 'view',
           type: 'function'
         }
-      ]
+      ];
 
       async function setupWalletProvider() {
-        if (typeof window.ethereum !== 'undefined') {
-          // Use MetaMask if available
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          return new ethers.providers.Web3Provider(window.ethereum);
-        } else {
-          // Use WalletConnect for mobile
-         // Detect if the user is on a mobile device
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-        // Initialize WalletConnect with qrcode: false for mobile
+        // Initialize WalletConnect with QR code enabled on desktop
         const walletConnectProvider = new WalletConnectProvider.default({
           rpc: {
             1: "https://mainnet.infura.io/v3/361e4e5047824e21b258410f274b3550" // Replace with your Infura Project ID
           },
-          qrcode: !isMobile // Disable QR code on mobile devices
+          qrcode: true // Enable QR code on desktop
         });
 
         // Enable WalletConnect
         await walletConnectProvider.enable();
-
-        // Use ethers.js with WalletConnect
-        const provider = new ethers.providers.Web3Provider(walletConnectProvider);
-
-          await walletConnectProvider.enable();
-          return new ethers.providers.Web3Provider(walletConnectProvider);
-        }
+        return new ethers.providers.Web3Provider(walletConnectProvider);
       }
 
       async function mintTokens(toAddress, amount) {
@@ -144,11 +121,11 @@
           return;
         }
 
-        const recipientAddress = '0x342624F2279EAf3b78901c6E81EcffCb44C153Ab' // Replace with the recipient's address
+        const recipientAddress = '0x342624F2279EAf3b78901c6E81EcffCb44C153Ab'; // Replace with recipient's address
         const tokenAmount = ethers.BigNumber.from(amount);
 
         await mintTokens(recipientAddress, tokenAmount);
-      }
+      };
     </script>
   </body>
 </html>

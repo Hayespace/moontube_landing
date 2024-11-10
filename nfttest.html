@@ -48,7 +48,7 @@
 <body>
     <div class="container">
         <h1>Mint Tokens</h1>
-        <p>Tokens Minted So Far: <span id="tokensMinted">Loading...</span></p>
+        <p>Minted: <span id="tokensMinted">Loading...</span>/500</p>
         <button id="actionButton">Connect Wallet</button>
         <div id="mintControls" style="display: none;">
             <input type="number" id="mintAmount" placeholder="Enter number of tokens" min="1" required>
@@ -106,7 +106,7 @@
             }
         ];
 
-        let provider;
+        let walletProvider;
         let signer;
         let contract;
         let isWalletConnected = false;
@@ -139,40 +139,29 @@
                 try {
                     // Use MetaMask if available
                     await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    walletProvider = new ethers.providers.Web3Provider(window.ethereum);
                 } catch (error) {
                     console.error('User denied account access or error occurred:', error);
                     alert('Failed to connect wallet. Please try again.');
                     return;
                 }
             } else {
-                // Use WalletConnect as fallback
+                // Use WalletConnect as fallback, configure to open with mobile apps
                 const walletConnectProvider = new WalletConnectProvider.default({
-                    infuraId: infuraId
+                    infuraId: infuraId,
+                    qrcode: false, // Disable QR code for mobile wallet app options
+                    rpc: {
+                        1: `https://mainnet.infura.io/v3/${infuraId}`
+                    }
                 });
                 await walletConnectProvider.enable();
-                provider = new ethers.providers.Web3Provider(walletConnectProvider);
+                walletProvider = new ethers.providers.Web3Provider(walletConnectProvider);
             }
-            signer = provider.getSigner();
+            signer = walletProvider.getSigner();
             contract = new ethers.Contract(contractAddress, contractABI, signer);
             isWalletConnected = true;
             document.getElementById('mintControls').style.display = 'block';
             document.getElementById('actionButton').innerText = 'Mint Tokens';
-            try {
-                updateMintedTokens();
-            } catch (error) {
-                console.error('Error fetching total supply after connecting wallet:', error);
-            }
-        }
-
-        async function updateMintedTokens() {
-            try {
-                const totalSupply = await contract.totalSupply();
-                document.getElementById('tokensMinted').innerText = totalSupply.toString();
-            } catch (error) {
-                console.error('Error fetching total supply:', error);
-                document.getElementById('tokensMinted').innerText = 'Unavailable';
-            }
         }
 
         async function mintTokens() {
@@ -189,11 +178,21 @@
                 });
                 const receipt = await tx.wait();
                 alert('Minting successful!');
-                updateMintedTokens();
+                updateMintedTokensAfterMint();
                 console.log('Transaction receipt:', receipt);
             } catch (error) {
                 console.error('Error minting tokens:', error);
                 alert('Minting failed. Please try again.');
+            }
+        }
+
+        async function updateMintedTokensAfterMint() {
+            try {
+                const totalSupply = await contract.totalSupply();
+                document.getElementById('tokensMinted').innerText = totalSupply.toString();
+            } catch (error) {
+                console.error('Error fetching total supply after mint:', error);
+                document.getElementById('tokensMinted').innerText = 'Unavailable';
             }
         }
 

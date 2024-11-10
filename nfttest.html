@@ -140,6 +140,11 @@
                     // Use MetaMask if available
                     await window.ethereum.request({ method: 'eth_requestAccounts' });
                     walletProvider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = walletProvider.getSigner();
+                    contract = new ethers.Contract(contractAddress, contractABI, signer);
+                    isWalletConnected = true;
+                    document.getElementById('mintControls').style.display = 'block';
+                    document.getElementById('actionButton').innerText = 'Mint Tokens';
                 } catch (error) {
                     console.error('User denied account access or error occurred:', error);
                     alert('Failed to connect wallet. Please try again.');
@@ -165,21 +170,18 @@
                     }
                 });
 
-                // Adding a slight delay to help ensure the provider initializes correctly on mobile browsers like Safari
-                setTimeout(async () => {
-                    try {
-                        await walletConnectProvider.enable();
-                        walletProvider = new ethers.providers.Web3Provider(walletConnectProvider);
-                        signer = walletProvider.getSigner();
-                        contract = new ethers.Contract(contractAddress, contractABI, signer);
-                        isWalletConnected = true;
-                        document.getElementById('mintControls').style.display = 'block';
-                        document.getElementById('actionButton').innerText = 'Mint Tokens';
-                    } catch (error) {
-                        console.error('Error enabling WalletConnect provider:', error);
-                        alert('Failed to connect using WalletConnect. Please try again.');
-                    }
-                }, 500); // 500ms delay
+                try {
+                    await walletConnectProvider.enable();
+                    walletProvider = new ethers.providers.Web3Provider(walletConnectProvider);
+                    signer = walletProvider.getSigner();
+                    contract = new ethers.Contract(contractAddress, contractABI, signer);
+                    isWalletConnected = true;
+                    document.getElementById('mintControls').style.display = 'block';
+                    document.getElementById('actionButton').innerText = 'Mint Tokens';
+                } catch (error) {
+                    console.error('Error enabling WalletConnect provider:', error);
+                    alert('Failed to connect using WalletConnect. Please try again.');
+                }
             }
         }
 

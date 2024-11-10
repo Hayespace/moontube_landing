@@ -95,11 +95,22 @@
           return new ethers.providers.Web3Provider(window.ethereum);
         } else {
           // Use WalletConnect for mobile
-          const walletConnectProvider = new WalletConnectProvider.default({
-  rpc: {
-    1: "https://mainnet.infura.io/v3/361e4e5047824e21b258410f274b3550" // Replace with your Infura Project ID
-  }
-});
+         // Detect if the user is on a mobile device
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        // Initialize WalletConnect with qrcode: false for mobile
+        const walletConnectProvider = new WalletConnectProvider.default({
+          rpc: {
+            1: "https://mainnet.infura.io/v3/361e4e5047824e21b258410f274b3550" // Replace with your Infura Project ID
+          },
+          qrcode: !isMobile // Disable QR code on mobile devices
+        });
+
+        // Enable WalletConnect
+        await walletConnectProvider.enable();
+
+        // Use ethers.js with WalletConnect
+        const provider = new ethers.providers.Web3Provider(walletConnectProvider);
 
           await walletConnectProvider.enable();
           return new ethers.providers.Web3Provider(walletConnectProvider);

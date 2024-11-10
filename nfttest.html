@@ -1,131 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mint Tokens</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.umd.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider/dist/umd/index.min.js"></script>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0;
-        margin: 0;
-      }
-      .container {
-        text-align: center;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      input {
-        padding: 8px;
-        margin: 8px 0;
-        font-size: 16px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      button {
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 100%;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <h1>Mint Tokens</h1>
-      <input type="number" id="amount" placeholder="Enter number of tokens" min="1" required />
-      <button onclick="handleMint()">Mint Tokens</button>
+        <h1>Mint Tokens</h1>
+        <p>Tokens Minted So Far: <span id="tokensMinted">Loading...</span></p>
+        <button id="actionButton">Connect Wallet</button>
+        <div id="mintControls" style="display: none;">
+            <input type="number" id="mintAmount" placeholder="Enter number of tokens" min="1" required>
+        </div>
     </div>
 
     <script type="module">
-      import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.esm.min.js';
+        import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.esm.min.js';
 
-      const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7';
-      const contractABI = [
-        {
-          inputs: [
-            { internalType: 'address', name: '_to', type: 'address' },
-            { internalType: 'uint256', name: '_amount', type: 'uint256' }
-          ],
-          name: 'mintToMultiple',
-          outputs: [],
-          stateMutability: 'payable',
-          type: 'function'
-        },
-        {
-          inputs: [
-            { internalType: 'uint256', name: '_count', type: 'uint256' }
-          ],
-          name: 'getPrice',
-          outputs: [
-            { internalType: 'uint256', name: '', type: 'uint256' }
-          ],
-          stateMutability: 'view',
-          type: 'function'
+        const infuraId = '361e4e5047824e21b258410f274b3550';
+        const recipientAddress = '0x342624F2279EAf3b78901c6E81EcffCb44C153Ab';
+        const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7';
+        const contractABI = [
+            {
+                inputs: [
+                    { internalType: 'address', name: '_to', type: 'address' },
+                    { internalType: 'uint256', name: '_amount', type: 'uint256' }
+                ],
+                name: 'mintToMultiple',
+                outputs: [],
+                stateMutability: 'payable',
+                type: 'function'
+            },
+            {
+                inputs: [
+                    {
+                        internalType: 'uint256',
+                        name: '_count',
+                        type: 'uint256'
+                    }
+                ],
+                name: 'getPrice',
+                outputs: [
+                    {
+                        internalType: 'uint256',
+                        name: '',
+                        type: 'uint256'
+                    }
+                ],
+                stateMutability: 'view',
+                type: 'function'
+            },
+            {
+                inputs: [],
+                name: 'totalSupply',
+                outputs: [
+                    {
+                        internalType: 'uint256',
+                        name: '',
+                        type: 'uint256'
+                    }
+                ],
+                stateMutability: 'view',
+                type: 'function'
+            }
+        ];
+
+        let provider;
+        let signer;
+        let contract;
+        let isWalletConnected = false;
+
+        // Initialize a read-only provider with Infura to get totalSupply initially
+        async function initializeReadOnlyProvider() {
+            try {
+                const infuraProvider = new ethers.providers.InfuraProvider('mainnet', infuraId);
+                const readOnlyContract = new ethers.Contract(contractAddress, contractABI, infuraProvider);
+                const totalSupply = await readOnlyContract.totalSupply();
+                document.getElementById('tokensMinted').innerText = totalSupply.toString();
+            } catch (error) {
+                console.error('Error fetching total supply from read-only provider:', error);
+                document.getElementById('tokensMinted').innerText = 'Unavailable';
+            }
         }
-      ];
 
-      async function setupWalletProvider() {
-        // Initialize WalletConnect with QR code enabled on desktop
-        const walletConnectProvider = new WalletConnectProvider.default({
-          rpc: {
-            1: "https://mainnet.infura.io/v3/361e4e5047824e21b258410f274b3550" // Replace with your Infura Project ID
-          },
-          qrcode: true // Enable QR code on desktop
-        });
+        window.addEventListener('load', initializeReadOnlyProvider);
 
-        // Enable WalletConnect
-        await walletConnectProvider.enable();
-        return new ethers.providers.Web3Provider(walletConnectProvider);
-      }
-
-      async function mintTokens(toAddress, amount) {
-        try {
-          const provider = await setupWalletProvider();
-          const signer = provider.getSigner();
-          const contract = new ethers.Contract(contractAddress, contractABI, signer);
-          const price = await contract.getPrice(amount);
-
-          const tx = await contract.mintToMultiple(toAddress, amount, {
-            value: ethers.BigNumber.from(price).toString()
-          });
-
-          const receipt = await tx.wait();
-          alert('Transaction successful!');
-          console.log('Transaction receipt:', receipt);
-        } catch (error) {
-          alert('Minting error!');
-          console.error('Error minting tokens:', error);
-        }
-      }
-
-      window.handleMint = async function () {
-        const amount = document.getElementById('amount').value;
-        if (!amount || isNaN(amount) || amount <= 0) {
-          alert('Please enter a valid token amount.');
-          return;
+        async function handleAction() {
+            if (!isWalletConnected) {
+                await connectWallet();
+            } else {
+                await mintTokens();
+            }
         }
 
-        const recipientAddress = '0x342624F2279EAf3b78901c6E81EcffCb44C153Ab'; // Replace with recipient's address
-        const tokenAmount = ethers.BigNumber.from(amount);
+        async function connectWallet() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    // Use MetaMask if available
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                } catch (error) {
+                    console.error('User denied account access or error occurred:', error);
+                    alert('Failed to connect wallet. Please try again.');
+                    return;
+                }
+            } else {
+                // Use WalletConnect as fallback
+                const walletConnectProvider = new WalletConnectProvider.default({
+                    infuraId: infuraId
+                });
+                await walletConnectProvider.enable();
+                provider = new ethers.providers.Web3Provider(walletConnectProvider);
+            }
+            signer = provider.getSigner();
+            contract = new ethers.Contract(contractAddress, contractABI, signer);
+            isWalletConnected = true;
+            document.getElementById('mintControls').style.display = 'block';
+            document.getElementById('actionButton').innerText = 'Mint Tokens';
+            try {
+                updateMintedTokens();
+            } catch (error) {
+                console.error('Error fetching total supply after connecting wallet:', error);
+            }
+        }
 
-        await mintTokens(recipientAddress, tokenAmount);
-      };
+        async function updateMintedTokens() {
+            try {
+                const totalSupply = await contract.totalSupply();
+                document.getElementById('tokensMinted').innerText = totalSupply.toString();
+            } catch (error) {
+                console.error('Error fetching total supply:', error);
+                document.getElementById('tokensMinted').innerText = 'Unavailable';
+            }
+        }
+
+        async function mintTokens() {
+            const mintAmount = document.getElementById('mintAmount').value;
+            if (!mintAmount || isNaN(mintAmount) || mintAmount <= 0) {
+                alert('Please enter a valid token amount.');
+                return;
+            }
+
+            try {
+                const price = await contract.getPrice(mintAmount);
+                const tx = await contract.mintToMultiple(recipientAddress, mintAmount, {
+                    value: price.toString()
+                });
+                const receipt = await tx.wait();
+                alert('Minting successful!');
+                updateMintedTokens();
+                console.log('Transaction receipt:', receipt);
+            } catch (error) {
+                console.error('Error minting tokens:', error);
+                alert('Minting failed. Please try again.');
+            }
+        }
+
+        document.getElementById('actionButton').addEventListener('click', handleAction);
     </script>
-  </body>
+</body>
 </html>

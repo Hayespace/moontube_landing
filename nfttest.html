@@ -150,6 +150,9 @@
                 const walletConnectProvider = new WalletConnectProvider.default({
                     infuraId: infuraId,
                     qrcode: false, // Disable QR code entirely
+                    rpc: {
+                        1: `https://mainnet.infura.io/v3/${infuraId}`
+                    },
                     qrcodeModalOptions: {
                         mobileLinks: [
                             "metamask",
@@ -159,19 +162,25 @@
                             "imtoken",
                             "pillar"
                         ]
-                    },
-                    rpc: {
-                        1: `https://mainnet.infura.io/v3/${infuraId}`
                     }
                 });
-                await walletConnectProvider.enable();
-                walletProvider = new ethers.providers.Web3Provider(walletConnectProvider);
+
+                // Adding a slight delay to help ensure the provider initializes correctly on mobile browsers like Safari
+                setTimeout(async () => {
+                    try {
+                        await walletConnectProvider.enable();
+                        walletProvider = new ethers.providers.Web3Provider(walletConnectProvider);
+                        signer = walletProvider.getSigner();
+                        contract = new ethers.Contract(contractAddress, contractABI, signer);
+                        isWalletConnected = true;
+                        document.getElementById('mintControls').style.display = 'block';
+                        document.getElementById('actionButton').innerText = 'Mint Tokens';
+                    } catch (error) {
+                        console.error('Error enabling WalletConnect provider:', error);
+                        alert('Failed to connect using WalletConnect. Please try again.');
+                    }
+                }, 500); // 500ms delay
             }
-            signer = walletProvider.getSigner();
-            contract = new ethers.Contract(contractAddress, contractABI, signer);
-            isWalletConnected = true;
-            document.getElementById('mintControls').style.display = 'block';
-            document.getElementById('actionButton').innerText = 'Mint Tokens';
         }
 
         async function mintTokens() {

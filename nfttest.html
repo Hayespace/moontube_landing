@@ -47,8 +47,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Mint Tokens</h1>
-        <p>Minted: <span id="tokensMinted">Loading...</span>/500</p>
+        <h1>Mint NFT</h1>
+        <p>NFT's Minted: <span id="tokensMinted">Loading...</span>/500</p>
         <button id="actionButton">Connect Wallet</button>
         <div id="mintControls" style="display: none;">
             <input type="number" id="mintAmount" placeholder="Enter number of tokens" min="1" required>
@@ -149,7 +149,16 @@
                 // Use WalletConnect as fallback, configure to open with mobile apps
                 const walletConnectProvider = new WalletConnectProvider.default({
                     infuraId: infuraId,
-                    qrcode: false, // Disable QR code for mobile wallet app options
+                    qrcodeModalOptions: {
+                        mobileLinks: [
+                            "metamask",
+                            "trust",
+                            "rainbow",
+                            "argent",
+                            "imtoken",
+                            "pillar"
+                        ]
+                    },
                     rpc: {
                         1: `https://mainnet.infura.io/v3/${infuraId}`
                     }

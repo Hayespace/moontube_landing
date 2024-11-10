@@ -52,8 +52,10 @@
       <button onclick="handleMint()">Mint Tokens</button>
     </div>
 
-    <script>
-      const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7';
+    <script type="module">
+      import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.0/ethers.esm.min.js'
+
+      const contractAddress = '0xa66c5d3e81acb18fb29e312f8da4029cab3c0ee7'
       const contractABI = [
         {
           inputs: [
@@ -67,16 +69,26 @@
         },
         {
           inputs: [
-            { internalType: 'uint256', name: '_count', type: 'uint256' }
+            {
+              internalType: 'uint256',
+              name: '_count',
+              type: 'uint256'
+            }
           ],
           name: 'getPrice',
-          outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+          outputs: [
+            {
+              internalType: 'uint256',
+              name: '',
+              type: 'uint256'
+            }
+          ],
           stateMutability: 'view',
           type: 'function'
         }
-      ];
+      ]
 
-      async function setupWalletConnect() {
+      async function setupWalletProvider() {
         if (typeof window.ethereum !== 'undefined') {
           // Use MetaMask if available
           await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -84,10 +96,11 @@
         } else {
           // Use WalletConnect for mobile
           const walletConnectProvider = new WalletConnectProvider.default({
-            rpc: {
-              1: "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID" // Replace with your own RPC URL if needed
-            }
-          });
+  rpc: {
+    1: "https://mainnet.infura.io/v3/361e4e5047824e21b258410f274b3550" // Replace with your Infura Project ID
+  }
+});
+
           await walletConnectProvider.enable();
           return new ethers.providers.Web3Provider(walletConnectProvider);
         }
@@ -95,7 +108,7 @@
 
       async function mintTokens(toAddress, amount) {
         try {
-          const provider = await setupWalletConnect();
+          const provider = await setupWalletProvider();
           const signer = provider.getSigner();
           const contract = new ethers.Contract(contractAddress, contractABI, signer);
           const price = await contract.getPrice(amount);
@@ -120,11 +133,11 @@
           return;
         }
 
-        const recipientAddress = '0x342624F2279EAf3b78901c6E81EcffCb44C153Ab'; // Replace with the recipient's address
+        const recipientAddress = '0x342624F2279EAf3b78901c6E81EcffCb44C153Ab' // Replace with the recipient's address
         const tokenAmount = ethers.BigNumber.from(amount);
 
         await mintTokens(recipientAddress, tokenAmount);
-      };
+      }
     </script>
   </body>
 </html>

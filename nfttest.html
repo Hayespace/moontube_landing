@@ -47,8 +47,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Mint NFT</h1>
-        <p>NFT's Minted: <span id="tokensMinted">Loading...</span>/500</p>
+        <h1>Mint Tokens</h1>
+        <p>Tokens Minted So Far: <span id="tokensMinted">Loading...</span></p>
         <button id="actionButton">Connect Wallet</button>
         <div id="mintControls" style="display: none;">
             <input type="number" id="mintAmount" placeholder="Enter number of tokens" min="1" required>
@@ -146,9 +146,10 @@
                     return;
                 }
             } else {
-                // Use WalletConnect as fallback, configure to open with mobile apps
+                // Use WalletConnect as fallback, configure to open with mobile apps only
                 const walletConnectProvider = new WalletConnectProvider.default({
                     infuraId: infuraId,
+                    qrcode: false, // Disable QR code entirely
                     qrcodeModalOptions: {
                         mobileLinks: [
                             "metamask",

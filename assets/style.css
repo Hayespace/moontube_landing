@@ -230,6 +230,15 @@ button {
     justify-content: center;
 }
 
+.bb {
+    display: flex; /* Add this to enable flexbox */
+    align-items: center; /* Centers content vertically */
+    justify-content: center; /* Centers content horizontally */
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+
 /* Info Box Styling */
 .info-box {
     background-color: #131316;
@@ -337,13 +346,35 @@ button {
     text-align: center;
 }
 
+/* Default styling for the video */
 .vid {
-    border: 1.5px solid transparent;
-    border-image-slice: 1;
-    box-shadow: 0 4px 8px rgba(120, 120, 120, 0.655);
-    transition: all 0.3s ease-in-out; /* Smooth transition */
-    width: 95%;
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Make the video responsive by default */
+    max-width: 700px; /* Set a maximum width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto; /* Center the video */
 }
+
+/* Styling for smaller screens */
+@media (max-width: 768px) {
+    .vid {
+        width: 90%; /* Reduce width for tablets and smaller devices */
+        max-width: 90%; /* Ensure it doesn't exceed screen width */
+    }
+}
+
+@media (max-width: 480px) {
+    .vid {
+        width: 100%; /* Use full width for mobile phones */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Adjust the heading size for smaller screens */
+        text-align: center; /* Center the heading text */
+    }
+}
+
 
 .step {
     margin: 20px 0;
@@ -638,8 +669,11 @@ button[type="submit"]:hover {
     text-decoration: none;
     color: #ffffff;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1rem;
     padding: 20px 40px;
+    max-width: 300px;
+    height: 50px;
+    margin-bottom: 20px;
     border-radius: 10px;
     background: linear-gradient(90deg, #FF3131, #942983, #543DD0, #1A82FF);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
